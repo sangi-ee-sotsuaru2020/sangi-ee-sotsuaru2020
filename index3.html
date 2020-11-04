@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<head>
+  <!-- ① スクリプトの読み込み -->
+  <!-- <script src="https://aframe.io/releases/0.8.2/aframe.min.js"></script> -->
+  <!-- <script src="https://cdn.rawgit.com/jeromeetienne/AR.js/1.6.2/aframe/build/aframe-ar.js"></script> -->
+
+  <!-- <script src="https://cdn.jsdelivr.net/gh/aframevr/aframe@1c2407b26c61958baa93967b5412487cd94b290b/dist/aframe-master.min.js"></script> -->
+  <!-- <script src="https://raw.githack.com/AR-js-org/AR.js/master/aframe/build/aframe-ar-nft.js"></script> -->
+
+  <script src="aframe-master.min.js"></script>
+  <script src="aframe-ar-nft.js"></script>
+
+  <!-- <script src="https://aframe.io/releases/0.8.2/aframe.min.js"></script> -->
+  <!-- <script src="https://cdn.rawgit.com/jeromeetienne/AR.js/1.6.0/aframe/build/aframe-ar.js"></script> -->
+  <!-- <script src="https://cdn.rawgit.com/donmccurdy/aframe-extras/v4.1.2/dist/aframe-extras.min.js"></script> -->
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <script>
+    AFRAME.registerComponent('vidhandler', {
+        init: function() {
+            this.toggle = false;
+            this.vid = document.querySelector("#vid");
+            this.vid.pause();
+        },
+        tick: function() {
+            if (this.el.object3D.visible == true) {
+                if (!this.toggle) {
+                    this.toggle = true;
+                    this.vid.play();
+                }
+            } else {
+                this.toggle = false;
+                this.vid.pause();
+            }
+        }
+    });
+
+    function refrespage() {
+        location.reload();
+    }
+
+    function playvid() {
+        vid.play();
+    }
+</script>
+</head>
+
+<style>
+  .arjs-loader {
+    height: 100%;
+    width: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    background-color: rgba(0, 0, 0, 0.8);
+    z-index: 9999;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .arjs-loader div {
+    text-align: center;
+    font-size: 1.25em;
+    color: white;
+  }
+</style>
+
+<body style="margin : 0px; overflow: hidden;">
+  <!-- minimal loader shown until image descriptors are loaded -->
+  <div class="arjs-loader">
+    <div>Loading, please wait...</div>
+  </div>
+  <a-scene
+    vr-mode-ui="enabled: false;"
+    renderer="logarithmicDepthBuffer: true;"
+    embedded
+    arjs="trackingMethod: best; sourceType: webcam;debugUIEnabled: false;"
+  >
+
+    <a-assets>
+      <video preload="auto" id="vid" poster="ANY IMAGE PATH (THUMBNAIL)" response-type="arraybuffer" loop="false" crossorigin webkit-playsinline playsinline controls>
+        <source  src="ab.mov">
+          <img src="ANY IMAGE PATH (THUMBNAIL)"> Your browser does not support Or Else Please Click Reset Button.
+      </video>
+    </a-assets>
+    
+    <!-- we use cors proxy to avoid cross-origin problems -->
+    <a-nft
+      type="nft"
+      url="https://arjs-cors-proxy.herokuapp.com/https://github.com/sangi-ee-sotsuaru2020/sangi-ee-sotsuaru2020/raw/master/markerTest"
+      smooth="true"
+      smoothCount="10"
+      smoothTolerance=".01"
+      smoothThreshold="2"
+    >
+      <a-video src="#ar-video" width="2.6" height="1.4" position="0 0 0" rotation="270 0 0" play="true"></a-video>
+    </a-nft>
+    <a-entity camera></a-entity>
+  </a-scene>
+  <script>
+    window.addEventListener('click', function () {
+    var v = document.querySelector('#ar-video');
+    v.play();
+    });
+  </script>
+</body>
+
+
+
+
+
+<!-- <body style='margin: 0; overflow: hidden;'> -->
+<!-- シーンの追加とデバックUIを非表示 -->
+<!-- <a-scene embedded arjs="debugUIEnabled:false;"> -->
+  <!-- ② hiroマーカーでのソース -->
+  <!-- <a-marker preset="hiro">
+    <a-sphere scale=".25 .25 .25" position="0 .5 0" color="#111">
+      <a-animation attribute="position" to="0 1 0" direction="alternate" dur="2000" repeat="indefinite">
+      </a-animation>
+    </a-sphere>
+  </a-marker> -->
+  <!-- ③ 作成したマーカーでのソース -->
+  <!-- <a-marker type='pattern' url='./marker2.patt'> 
+    <a-sphere scale=".25 .25 .25" position="0 .5 0" color="#f00">
+      <a-animation attribute="position" to="0 1 0" direction="alternate" dur="2000" repeat="indefinite">
+      </a-animation>
+    </a-sphere>
+  </a-marker>
+  <a-entity camera></a-entity>
+</a-scene>
+</body>
+</html>-->
+
+
