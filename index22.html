@@ -18,32 +18,22 @@
   <script src="https://raw.githack.com/AR-js-org/studio-backend/master/src/modules/marker/tools/gesture-detector.js"></script>
   <script src="https://raw.githack.com/AR-js-org/studio-backend/master/src/modules/marker/tools/gesture-handler.js"></script>
   <script>
-    AFRAME.registerComponent('vidhandler', {
-        init: function() {
-            this.toggle = false;
+    AFRAME.registerComponent('videohandler', {
+        init: function () {
+            var marker = this.el;
             this.vid = document.querySelector("#vid");
-            this.vid.pause();
-        },
-        tick: function() {
-            if (this.el.object3D.visible == true) {
-                if (!this.toggle) {
-                    this.toggle = true;
-                    this.vid.play();
-                }
-            } else {
+
+            marker.addEventListener('markerFound', function () {
+                this.toggle = true;
+                this.vid.play();
+            }.bind(this));
+
+            marker.addEventListener('markerLost', function () {
                 this.toggle = false;
                 this.vid.pause();
-            }
-        }
+            }.bind(this));
+        },
     });
-
-    function refrespage() {
-        location.reload();
-    }
-
-    function playvid() {
-        vid.play();
-    }
 </script>
 </head>
 
@@ -80,12 +70,20 @@
     arjs="trackingMethod: best; sourceType: webcam;debugUIEnabled: false;"
   >
 
-    <a-assets>
-      <video preload="auto" id="vid" poster="ANY IMAGE PATH (THUMBNAIL)" response-type="arraybuffer" loop="false" crossorigin webkit-playsinline playsinline controls>
-        <source  src="ab.mov">
-          <img src="ANY IMAGE PATH (THUMBNAIL)"> Your browser does not support Or Else Please Click Reset Button.
-      </video>
-    </a-assets>
+  <a-assets>
+    <video
+        id="vid"
+        src="assets/asset.mp4"
+        preload="auto"
+        response-type="arraybuffer"
+        loop
+        crossorigin
+        webkit-playsinline
+        autoplay
+        muted
+        playsinline
+    ></video>
+</a-assets>
     
     <!-- we use cors proxy to avoid cross-origin problems -->
     <a-nft
@@ -96,14 +94,14 @@
       smoothTolerance=".01"
       smoothThreshold="2"
     >
-      <!-- <a-entity
-        gltf-model="https://arjs-cors-proxy.herokuapp.com/https://raw.githack.com/AR-js-org/AR.js/master/aframe/examples/image-tracking/nft/trex/scene.gltf"
-        scale="5 5 5"
-        position="50 150 0"
-      >-->
-      <a-entity>
-        <a-plane position='0 0.1 0' rotation="-90 0 0" material='transparent:true;src:#vid' controls></a-plane>
-      </a-entity>
+    <a-video
+    src="#vid"
+    scale="1 1 1"
+    position="0 0.1 0"
+    rotation="-90 0 0"
+    class="clickable"
+    gesture-handler
+></a-video>
     </a-nft>
     <a-entity camera></a-entity>
   </a-scene>
@@ -132,7 +130,8 @@
   </a-marker>
   <a-entity camera></a-entity>
 </a-scene>
-</body>
-</html>-->
+</body>-->
+
+</html>
 
 
