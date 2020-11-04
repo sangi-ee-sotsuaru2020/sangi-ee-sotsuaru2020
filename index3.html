@@ -76,14 +76,9 @@
     embedded
     arjs="trackingMethod: best; sourceType: webcam;debugUIEnabled: false;"
   >
-
     <a-assets>
-      <video preload="auto" id="vid" poster="ANY IMAGE PATH (THUMBNAIL)" response-type="arraybuffer" loop="false" crossorigin webkit-playsinline playsinline controls>
-        <source  src="ab.mov">
-          <img src="ANY IMAGE PATH (THUMBNAIL)"> Your browser does not support Or Else Please Click Reset Button.
-      </video>
+      <img id="marker" src="marker.PNG">
     </a-assets>
-    
     <!-- we use cors proxy to avoid cross-origin problems -->
     <a-nft
       type="nft"
@@ -93,16 +88,10 @@
       smoothTolerance=".01"
       smoothThreshold="2"
     >
-      <a-video src="#ar-video" width="2.6" height="1.4" position="0 0 0" rotation="270 0 0" play="true"></a-video>
+      <a-image id="marker" src="#marker" position="0 0 0" rotation="-90 0 0">
     </a-nft>
     <a-entity camera></a-entity>
   </a-scene>
-  <script>
-    window.addEventListener('click', function () {
-    var v = document.querySelector('#ar-video');
-    v.play();
-    });
-  </script>
 </body>
 
 
