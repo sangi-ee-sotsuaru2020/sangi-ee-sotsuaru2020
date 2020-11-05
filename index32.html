@@ -58,10 +58,8 @@
         embedded arjs='trackingMethod: best; sourceType: webcam; debugUIEnabled: false;'>
 
         <a-assets>
-            <video src="https://cors-anywhere.herokuapp.com/https://www.w3schools.com/html/mov_bbb.mp4"
-                preload="auto" id="vid" response-type="arraybuffer" loop
-                crossorigin webkit-playsinline autoplay muted playsinline>
-            </video>
+            <!-- <video src="https://cors-anywhere.herokuapp.com/https://www.w3schools.com/html/mov_bbb.mp4" preload="auto" id="vid" response-type="arraybuffer" loop crossorigin webkit-playsinline autoplay muted playsinline></video> -->
+            <video id="ar-video" autoplay loop="true" muted="true" src="magicphoto.mp4"></video>
         </a-assets>
 
         <a-nft
@@ -71,7 +69,7 @@
         >
             <!-- position="x z y" -->
             <a-video
-                src="#vid"
+                src="#ar-video"
                 position='85 0 -150'
                 rotation="270 0 0"
                 width='170'
