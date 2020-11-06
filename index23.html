@@ -8,10 +8,10 @@
 <script src="aframe-ar-nft.js"></script>
 
 <script>
-    window.addEventListener('markerFound', function () {
+    /*window.addEventListener('markerFound', function () {
       var v = document.querySelector('#vid');
       v.play();
-      });
+      });*/
 
     /*window.onload = function() {
         AFRAME.registerComponent('videohandler', {
@@ -36,6 +36,33 @@
       var v = document.querySelector('#vid');
       v.play();
     };*/
+
+    AFRAME.registerComponent('vidhandler', {
+            init: function() {
+                this.toggle = false;
+                this.vid = document.querySelector("#vid");
+                this.vid.pause();
+            },
+            tick: function() {
+                if (this.el.object3D.visible == true) {
+                    if (!this.toggle) {
+                        this.toggle = true;
+                        this.vid.play();
+                    }
+                } else {
+                    this.toggle = false;
+                    this.vid.pause();
+                }
+            }
+        });
+
+        function refrespage() {
+            location.reload();
+        }
+
+        function playvid() {
+            vid.play();
+        }
 </script>
 </head>
 
