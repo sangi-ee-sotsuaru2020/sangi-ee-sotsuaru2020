@@ -1,92 +1,42 @@
-<!DOCTYPE html>
-<head>
-  <!-- ① スクリプトの読み込み -->
-  <!-- <script src="https://aframe.io/releases/0.8.2/aframe.min.js"></script> -->
-  <!-- <script src="https://cdn.rawgit.com/jeromeetienne/AR.js/1.6.2/aframe/build/aframe-ar.js"></script> -->
-
-  <!-- <script src="https://cdn.jsdelivr.net/gh/aframevr/aframe@1c2407b26c61958baa93967b5412487cd94b290b/dist/aframe-master.min.js"></script> -->
-  <!-- <script src="https://raw.githack.com/AR-js-org/AR.js/master/aframe/build/aframe-ar-nft.js"></script> -->
-
-  <script src="aframe-master.min.js"></script>
-  <script src="aframe-ar-nft.js"></script>
-</head>
-
-<style>
-  .arjs-loader {
-    height: 100%;
-    width: 100%;
-    position: absolute;
-    top: 0;
-    left: 0;
-    background-color: rgba(0, 0, 0, 0.8);
-    z-index: 9999;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-  }
-
-  .arjs-loader div {
-    text-align: center;
-    font-size: 1.25em;
-    color: white;
-  }
-</style>
-
-<body style="margin : 0px; overflow: hidden;">
-  <!-- minimal loader shown until image descriptors are loaded -->
-  <div class="arjs-loader">
-    <div>Loading, please wait...</div>
-  </div>
-  <a-scene
-    vr-mode-ui="enabled: false;"
-    renderer="logarithmicDepthBuffer: true;"
-    embedded
-    arjs="trackingMethod: best; sourceType: webcam;debugUIEnabled: false;"
-  >
-    
-    <!-- we use cors proxy to avoid cross-origin problems -->
-    <a-nft
-      type="nft"
-      url="https://arjs-cors-proxy.herokuapp.com/https://github.com/sangi-ee-sotsuaru2020/sangi-ee-sotsuaru2020/raw/master/markerTest"
-      smooth="true"
-      smoothCount="10"
-      smoothTolerance=".01"
-      smoothThreshold="2"
-    >
-    <a-entity
-        gltf-model="https://arjs-cors-proxy.herokuapp.com/https://raw.githack.com/AR-js-org/AR.js/master/aframe/examples/image-tracking/nft/trex/scene.gltf"
-        scale="5 5 5"
-        position="50 150 0"
-      >
-    </a-nft>
-    <a-entity camera></a-entity>
-  </a-scene>
-</body>
-
-
-
-
-
-<!-- <body style='margin: 0; overflow: hidden;'> -->
-<!-- シーンの追加とデバックUIを非表示 -->
-<!-- <a-scene embedded arjs="debugUIEnabled:false;"> -->
-  <!-- ② hiroマーカーでのソース -->
-  <!-- <a-marker preset="hiro">
-    <a-sphere scale=".25 .25 .25" position="0 .5 0" color="#111">
-      <a-animation attribute="position" to="0 1 0" direction="alternate" dur="2000" repeat="indefinite">
-      </a-animation>
-    </a-sphere>
-  </a-marker> -->
-  <!-- ③ 作成したマーカーでのソース -->
-  <!-- <a-marker type='pattern' url='./marker2.patt'> 
-    <a-sphere scale=".25 .25 .25" position="0 .5 0" color="#f00">
-      <a-animation attribute="position" to="0 1 0" direction="alternate" dur="2000" repeat="indefinite">
-      </a-animation>
-    </a-sphere>
-  </a-marker>
-  <a-entity camera></a-entity>
-</a-scene>
-</body>-->
+<!doctype HTML>
+<html>
+  <script src="https://aframe.io/releases/0.9.2/aframe.min.js"></script>
+  <script src="https://cdn.rawgit.com/jeromeetienne/AR.js/1.7.7/aframe/build/aframe-ar.js"></script>
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <title>mobiliphotus</title>
+  <body style='margin : 0px; overflow: hidden;'>
+    <a-assets>
+      <!-- <video id="ar-video" autoplay loop="true" muted="true" src="assets/asset.mp4"></video> -->
+      <!-- <video src="https://cors-anywhere.herokuapp.com/https://www.w3schools.com/html/mov_bbb.mp4" preload="auto" id="vid" response-type="arraybuffer" loop crossorigin webkit-playsinline autoplay muted playsinline></video> -->
+      <!-- <video src="https://github.com/sangi-ee-sotsuaru2020/sangi-ee-sotsuaru2020/raw/master/magicphoto.mp4" preload="auto" id="vid" response-type="arraybuffer" loop crossorigin webkit-playsinline autoplay muted playsinline></video> -->
+      <video id="ar-video" src="magicphoto.mp4" muted autoplay playinline loop webkit-playsinline></video>
+	  </a-assets>
+	  <!-- デバッグ用の画面表示、VR用のボタンをそれぞれ非表示に -->
+    <a-scene embedded arjs="debugUIEnabled:false;patternRatio:0.5;" vr-mode-ui="enabled: false">
+      <!-- 今回作成した『.patt』ファイルを読み込む -->
+      <!-- <a-marker type='hiro'> -->
+        <!-- position="x z y" -->
+        <!-- version1 position="2.1 0 2.5" -->
+        <!-- version2 position="-2.3 0 -1.25" -->
+        <!-- <a-video src="#ar-video" width="5.5" height="3.5" position="2.1 0 2.5" rotation="270 0 0" play="true"></a-video> -->
+      <!-- </a-marker> -->
+      <a-marker type='pattern' url='./qrmarker/pattern-qrmarker.patt'>
+        <!-- position="x z y" -->
+        <!-- version1 position="2.1 0 2.5" -->
+        <!-- version2 position="-2.3 0 -1.25" -->
+        <a-video src="#ar-video" width="5.5" height="3.5" position="2.1 0 2.5" rotation="270 0 0"></a-video>
+      </a-marker>
+      <a-entity camera></a-entity>
+    </a-scene>
+    <script>
+      var v = document.querySelector('#ar-video');
+      v.play();
+    </script>
+    <!-- <script>
+      window.addEventListener('change', function () {
+      var v = document.querySelector('#ar-video');
+      v.play();
+      });
+    </script> -->
+  </body>
 </html>
-
-
