@@ -7,7 +7,7 @@
       <!-- <video id="ar-video" autoplay loop="true" muted="true" src="assets/asset.mp4"></video> -->
       <!-- <video src="https://cors-anywhere.herokuapp.com/https://www.w3schools.com/html/mov_bbb.mp4" preload="auto" id="vid" response-type="arraybuffer" loop crossorigin webkit-playsinline autoplay muted playsinline></video> -->
       <!-- <video src="https://github.com/sangi-ee-sotsuaru2020/sangi-ee-sotsuaru2020/raw/master/magicphoto.mp4" preload="auto" id="vid" response-type="arraybuffer" loop crossorigin webkit-playsinline autoplay muted playsinline></video> -->
-      <video id="ar-video" autoplay loop="true" muted="true" src="magicphoto.mp4" muted autoplay playinline loop></video>
+      <video id="ar-video" src="magicphoto.mp4" muted autoplay playinline loop></video>
 	  </a-assets>
 	  <!-- デバッグ用の画面表示、VR用のボタンをそれぞれ非表示に -->
     <a-scene embedded arjs="debugUIEnabled:false;patternRatio:0.5;" vr-mode-ui="enabled: false">
@@ -23,7 +23,7 @@
         <!-- version1 position="2.1 0 2.5" -->
         <!-- version2 position="-2.3 0 -1.25" -->
         <meta name="apple-mobile-web-app-capable" content="yes">
-        <a-video src="#ar-video" width="5.5" height="3.5" position="2.1 0 2.5" rotation="270 0 0" play="true" webkit-playsinline playsinline></a-video>
+        <a-video src="#ar-video" width="5.5" height="3.5" position="2.1 0 2.5" rotation="270 0 0" webkit-playsinline playsinline></a-video>
       </a-marker>
       <a-entity camera></a-entity>
     </a-scene>
